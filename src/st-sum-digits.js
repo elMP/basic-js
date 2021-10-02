@@ -12,7 +12,24 @@ import { NotImplementedError } from '../extensions/index.js';
  * For 91, the result should be 1 (9 + 1 = 10, 1 + 0 = 1)
  *
  */
-export default function getSumOfDigits(/* n */) {
-  throw new NotImplementedError('Not implemented');
+export default function getSumOfDigits(n) {
+  //throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
+  const str = n.toString();
+
+  const sum = recursiveSum(str);
+
+  return sum;
+}
+
+function recursiveSum(str) {
+  let sum = 0;
+  for (let i = 0; i < str.length; i++) {
+    sum += +str[i];
+  }
+
+  if (sum < 10)
+    return sum;
+
+  return recursiveSum(sum.toString());
 }
