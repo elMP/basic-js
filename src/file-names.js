@@ -19,21 +19,25 @@ function renameFiles(names) {
   //throw new NotImplementedError('Not implemented');
   // remove line with error and write your code here
   let output = [];
-  let fileNames = [];
+  let fileNames = {};
 
   for (let i = 0; i < names.length; i++) {
     console.log(fileNames)
-    if (fileNames.indexOf(names[i]) === -1) {
+    if (output.indexOf(names[i]) === -1) {
       output.push(names[i]);
-      fileNames.push({ "names[i]": 0 });
+      let newFile = {};
+      newFile[names[i]] = 0;
+      fileNames[names[i]] = 0;
     }
-    else {
-      let lastFile = output[output.lastIndexOf(names[i])];
-      console.log(lastFile)
-      let num = Number(lastFile[lastFile.length - 2]);
-      if (isNaN(num))
-        num = 1;
-      output.push(names[i] + `(${num})`);
+    else if (fileNames.hasOwnProperty(names[i])) {
+      let lastNumber = ++fileNames[names[i]];
+      //console.log(lastFile)
+      //let num = Number(lastFile[lastFile.length - 2]);
+      // if (isNaN(num))
+      //  num = 1;
+      output.push(names[i] + `(${lastNumber})`);
+    } else {
+      output.push(names[i] + '(1)');
     }
   }
 
