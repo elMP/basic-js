@@ -3,9 +3,9 @@ const { NotImplementedError } = require('../extensions/index.js');
 /**
  * Implement class DepthCalculator with method calculateDepth
  * that calculates deoth of nested array
- * 
+ *
  * @example
- * 
+ *
  * const depthCalc = new DepthCalculator();
  * depthCalc.calculateDepth([1, 2, 3, 4, 5]) => 1
  * depthCalc.calculateDepth([1, 2, 3, [4, 5]]) => 2
@@ -16,14 +16,12 @@ class DepthCalculator {
   calculateDepth(arr) {
     let depth = 0;
     //console.log(arr)
-    arr.forEach(element => {
-      if (depth < 1)
-        depth = 1;
+    arr.forEach((element) => {
+      if (depth < 1) depth = 1;
 
       if (Array.isArray(element)) {
         const currentDepth = recursionCalculate(element, 2);
-        if (currentDepth > depth)
-          depth = currentDepth;
+        if (currentDepth > depth) depth = currentDepth;
         // console.log("1", depth, element)
       }
     });
@@ -32,23 +30,24 @@ class DepthCalculator {
   }
 }
 
-
 function recursionCalculate(arr, depth) {
   // depth++;
 
-  arr.forEach(element => {
-    console.log("2", depth, arr, ' ', element)
+  let maxDepth = depth;
+
+  arr.forEach((element) => {
+    let levelDepth = depth;
+    console.log('2', depth, arr, ' ', element);
     if (Array.isArray(element)) {
-      const currentDepth = recursionCalculate(element, ++depth);
-      if (currentDepth > depth)
-        depth = currentDepth;
+      const currentDepth = recursionCalculate(element, ++levelDepth);
+      if (currentDepth > maxDepth) maxDepth = currentDepth;
     }
     //  else
     //   return depth;
   });
 
-  return depth;
+  return maxDepth;
 }
 module.exports = {
-  DepthCalculator
+  DepthCalculator,
 };
